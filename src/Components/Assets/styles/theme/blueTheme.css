@@ -1,0 +1,9 @@
+[data-theme="blue"] {
+  --text-color: #ffffff;
+  --bg-color: #0c192d;
+  --sidebar-bg-color: #2f476b;
+  --sidebar-bg-top: #16263c;
+  --kpi-bg: #11233f;
+  --sidebar-bg-user: #113d84;
+  --sidebar-border: #ffffff;
+}
