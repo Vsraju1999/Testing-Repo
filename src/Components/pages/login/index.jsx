@@ -29,7 +29,6 @@ const LoginForm = ({ setUserRole, setIsAuthenticated }) => {
       ...formData,
       [e.target.name]: value,
     });
-    console.log(formData, "formData");
   };
 
   const handleSubmit = (e) => {
@@ -41,7 +40,6 @@ const LoginForm = ({ setUserRole, setIsAuthenticated }) => {
     }
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    // console.log(users, "users");
     const user = users.find(
       (user) =>
         user.email === formData.email && user.password === formData.password
@@ -68,7 +66,7 @@ const LoginForm = ({ setUserRole, setIsAuthenticated }) => {
     if (user.role === "admin") {
       navigate("/dashboard/admin");
     } else {
-      navigate("/dashboard/user");
+      navigate("/app-repo");
     }
   };
 

@@ -10,9 +10,7 @@ import { Collaboration } from "../../Assets/Icons";
 
 const DashboardUser = ({ userRole, getAuth }) => {
   return (
-    <div className="flex w-full h-full">
-      <div style={{ width: "95%", position: "fixed", marginLeft: "5%" }}></div>
-    </div>
+   <div>Welcome to Dashboard</div>
   );
 };
 

@@ -15,6 +15,7 @@ import ITSM from "./Components/pages/ITSM/indx";
 import AssetXplorer from "./Components/pages/AssetXplorer";
 import ApplicationScorecard from "./Components/pages/Application";
 import Collaboration from "./Components/pages/Collaboration";
+import DashboardUser from "./Components/pages/dashboard/dashboardUser";
 
 const PrivateRoute = ({ element, userRole, handleLogouts }) => {
   const isAuthenticated = JSON.parse(localStorage.getItem("auth"));
@@ -56,10 +57,23 @@ const App = () => {
     <BrowserRouter>
       <RecoilRoot>
         <Routes>
-          <Route element={<LoginForm setUserRole={setUserRole} />} path="/" />
+          <Route
+            element={<LoginForm setUserRole={setUserRole} />}
+            path="/login"
+          />
           <Route element={<SignUpForm />} path="/signup" />
           <Route
-            path="/dashboard/user"
+            path="/"
+            element={
+              <PrivateRoute
+                element={<DashboardUser />}
+                userRole={userRole}
+                handleLogouts={handleLogouts}
+              />
+            }
+          />
+          <Route
+            path="/itsm"
             element={
               <PrivateRoute
                 element={<ITSM />}
@@ -69,7 +83,7 @@ const App = () => {
             }
           />
           <Route
-            path="/dashboard/user/assetXplorer"
+            path="/assetXplorer"
             element={
               <PrivateRoute
                 element={<AssetXplorer />}
@@ -79,7 +93,7 @@ const App = () => {
             }
           />
           <Route
-            path="/dashboard/user/application"
+            path="/app-repo"
             element={
               <PrivateRoute
                 element={<ApplicationScorecard />}
@@ -89,7 +103,17 @@ const App = () => {
             }
           />
           <Route
-            path="/dashboard/user/collaboration"
+            path="/app-repo/app-summary"
+            element={
+              <PrivateRoute
+                element={<ApplicationScorecard />}
+                userRole={userRole}
+                handleLogouts={handleLogouts}
+              />
+            }
+          />
+          <Route
+            path="/collaboration"
             element={
               <PrivateRoute
                 element={<Collaboration />}

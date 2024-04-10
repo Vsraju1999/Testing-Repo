@@ -15,7 +15,7 @@ const ITSM = () => {
     <div className="flex h-full w-full flex-col" style={{ height: "100vh" }}>
       <div
         style={{
-          height: "65px",
+          height: "55px",
           background: "var(--bg-color)",
           color: "var(--text-color)",
           display: "flex",
@@ -86,24 +86,24 @@ const ITSM = () => {
           <div
             style={{
               width: "100%",
-              height: "330px",
-              background: "var(--kpi-bg)",
-              color: "var(--kpi-text)",
-              padding: "10px",
-            }}
-          >
-            <LineChartComponent />
-          </div>
-          <div
-            style={{
-              width: "100%",
-              height: "330px",
+              height: "400px",
               background: "var(--kpi-bg)",
               color: "var(--kpi-text)",
               padding: "10px",
             }}
           >
             <BarChartComponent />
+          </div>
+          <div
+            style={{
+              width: "100%",
+              height: "400px",
+              background: "var(--kpi-bg)",
+              color: "var(--kpi-text)",
+              padding: "10px",
+            }}
+          >
+            <LineChartComponent />
           </div>
         </div>
         <div className="flex flex-row justify-between gap-3">
@@ -130,28 +130,6 @@ const ITSM = () => {
             <DynamicBarComponent />
           </div>
         </div>
-        {/* <div className="flex flex-row justify-between gap-5">
-          <div
-            style={{
-              width: "100%",
-              height: "240px",
-             background: 'var(--kpi-bg)',
-              color: "var( --kpi-text)",
-            }}
-          >
-            1
-          </div>
-          <div
-            style={{
-              width: "100%",
-              height: "240px",
-             background: 'var(--kpi-bg)',
-              color: "#fff",
-            }}
-          >
-            1
-          </div>
-        </div> */}
       </div>
     </div>
   );

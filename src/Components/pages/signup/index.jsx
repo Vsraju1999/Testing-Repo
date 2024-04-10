@@ -102,7 +102,7 @@ const SignUpForm = () => {
     });
 
     // Navigate to login page after successful signup
-    window.location.href = "/";
+    window.location.href = "/login";
   };
 
   return (
@@ -247,7 +247,7 @@ const SignUpForm = () => {
             <option value="admin">Admin</option>
           </select>
           <Link
-            to="/"
+            to="/login"
             className="inline-block align-baseline font-bold text-sm text-white-800 hover:text-gray-1000"
           >
             Already have an account? Login

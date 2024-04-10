@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   AlarmIcon,
+  AppRepoIcon,
+  AssetIcon,
+  BotInsights,
   Collaboration,
+  DashboardIcon,
   FaCheck,
   FaChevronDown,
   FaChevronUp,
@@ -10,6 +14,8 @@ import {
   GiHamburgerMenu,
   ItsmIcon,
   LogoLightTheme,
+  SecurityIcon,
+  VisibilityIcon,
   XplorerIcon,
 } from "../../Assets/Icons";
 import { Route, Routes } from "react-router-dom";
@@ -19,21 +25,38 @@ import ApplicationScorecard from "../Application";
 import ITSM from "../ITSM/indx";
 
 const json = [
-  { icons: <ItsmIcon />, title: "ITSM", path: "/dashboard/user" },
+  { icons: <DashboardIcon />, title: "Dashboard", path: "/" },
+  { icons: <ItsmIcon />, title: "ITSM", path: "/itsm" },
   {
-    icons: <AlarmIcon />,
+    icons: <AssetIcon />,
     title: "Asset Xplorer",
-    path: "/dashboard/user/assetXplorer",
+    path: "/assetXplorer",
   },
   {
-    icons: <XplorerIcon />,
+    icons: <AppRepoIcon />,
     title: "Application ScoreCard",
-    path: "/dashboard/user/application",
+    path: "/app-repo",
   },
   {
     icons: <Collaboration />,
     title: "Collaboration",
-    path: "/dashboard/user/collaboration",
+    path: "/collaboration",
+  },
+  {
+    icons: <BotInsights />,
+    title: "Automation",
+    path: "/automation",
+  },
+  {
+    icons: <SecurityIcon />,
+    title: "Vulnerability",
+    path: "/vulnerability",
+  },
+
+  {
+    icons: <VisibilityIcon />,
+    title: "Visibility",
+    path: "/visibility",
   },
 ];
 
@@ -54,8 +77,6 @@ const NavBar = ({ userRole, handleLogouts, children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location?.pathname, "location");
-
   const toggle = () => setIsOpen(!isOpen);
   const handleItemClick = (path) => {
     setActiveItem(path);
@@ -72,7 +93,7 @@ const NavBar = ({ userRole, handleLogouts, children }) => {
     localStorage.removeItem("auth");
     localStorage.removeItem("userRole");
     handleLogouts();
-    navigate("/");
+    navigate("/login");
   };
 
   const toggleLeftMenu = () => {
@@ -83,30 +104,25 @@ const NavBar = ({ userRole, handleLogouts, children }) => {
   React.useEffect(() => {
     const ctheme = localStorage.getItem("theme") || theme;
     handleTheme(ctheme);
-  }, [userRole]);
+  }, [theme]);
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex w-full h-full" style={{ height: "100vh" }}>
       <div
         style={{
           width: isOpen ? "250px" : "60px",
           position: "absolute",
-          zIndex: isOpen ? "10000" : "9999",
+          zIndex: isOpen ? "9999" : "9999",
           height: "100vh",
           backgroundColor: "var(--bg-color)",
           border: "1px solid var(--sidebar-border)",
         }}
         className="flex-initial"
       >
-        <div
-          className="top_section flex flex-col gap-2"
-          style={{
-            height: isToggleOpen ? "190px" : "100px",
-          }}
-        >
+        <div className="top_section flex flex-col gap-2">
           <div
             style={{ cursor: "pointer" }}
-            className="bars flex flex-row gap-5"
+            className="flex flex-row gap-5"
             onClick={() => toggleLeftMenu()}
             onKeyDown={() => toggleLeftMenu()}
           >
@@ -125,38 +141,39 @@ const NavBar = ({ userRole, handleLogouts, children }) => {
             </span>
           </div>
 
-          {userRole && (
-            <div className="flex flex-row gap-5">
-              <div className="aside_avatar">
-                {userRole?.firstname?.charAt(0)}
-                {userRole?.lastname?.charAt(0)}
-              </div>
-              <h1
-                style={{
-                  display: isOpen ? "block" : "none",
-                  alignSelf: "center",
-                  color: "var(--hamberger-text)",
-                }}
-              >
-                {userRole.firstname} {userRole.lastname}
-              </h1>
-              <span
-                className="ml-auto mini cursor-pointer flex"
-                style={{
-                  alignSelf: "center",
-                  color: "var(--hamberger-text)",
-                  display: isOpen ? "block" : "none",
-                }}
-                onClick={() => setIsToggleOpen(!isToggleOpen)}
-                onKeyDown={() => setIsToggleOpen(!isToggleOpen)}
-                role="button"
-                tabIndex={-2}
-              >
-                {isToggleOpen ? <FaChevronUp /> : <FaChevronDown />}
-              </span>
+          {/* {userRole && ( */}
+          <div className="flex flex-row gap-5">
+            <div className="aside_avatar">
+              {/* {userRole?.firstname?.charAt(0)}
+                {userRole?.lastname?.charAt(0)} */}
+              RV
             </div>
-          )}
-          {isMenuOpen?.value && isToggleOpen && (
+            <h1
+              style={{
+                display: isOpen ? "block" : "none",
+                alignSelf: "center",
+                color: "var(--hamberger-text)",
+              }}
+            >
+              Raju Vangipurapu
+            </h1>
+            <span
+              className="ml-auto mini cursor-pointer flex"
+              style={{
+                alignSelf: "center",
+                color: "var(--hamberger-text)",
+                display: isOpen ? "block" : "none",
+              }}
+              onClick={() => setIsToggleOpen(!isToggleOpen)}
+              onKeyDown={() => setIsToggleOpen(!isToggleOpen)}
+              role="button"
+              tabIndex={-2}
+            >
+              {isToggleOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </span>
+          </div>
+          {/* )} */}
+          {isToggleOpen && (
             <div
               className="toggleView"
               style={{
@@ -212,19 +229,24 @@ const NavBar = ({ userRole, handleLogouts, children }) => {
             backgroundColor: "var(--sidebar-bg-color)",
             display: "flex",
             flexDirection: "column",
-            height: isToggleOpen ? "calc(100% - 190px)" : "calc(100% - 100px)",
+            height: isToggleOpen
+              ? "calc(100vh - 210px)"
+              : "calc(100vh - 120px)",
           }}
         >
           {json.map((item, index) => (
             <NavLink
+              exact
               to={item.path}
               key={index}
               className="link"
-              activeClassName="active"
+              activeClassName={activeItem === item.path ? "active" : ""}
               onClick={() => handleItemClick(item.path)}
             >
               <div
-                className="icon"
+                className={`icon ${
+                  location.pathname === item.path ? "active" : ""
+                }`}
                 style={{ display: "flex", alignItems: "center" }}
               >
                 {item.icons}
